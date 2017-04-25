@@ -18,6 +18,7 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos);
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 GLfloat presstime, globletime;
 
+void draw_ground();
 void drawCoordinate();
 Camera cam(1.0f, 1.0f, 1.f,
 	   0.0f, 1.0f, 0.0f,
@@ -45,8 +46,8 @@ int main() {
 
   for (int i = 0; i < 2; i++) {
     for (int j = 0; j < 3; j++) {
-      wa[3*i+j] = wall(0.0, i*0.1, j*0.1,
-		   0.1,   0.1,  0.1);
+      wa[3*i+j] = wall(0.0, i*0.3, j*0.1,
+		   0.1,   0.1,  0.3);
     }
   }
   while(!glfwWindowShouldClose(window)) {
@@ -64,8 +65,8 @@ int main() {
 
     for (int i = 0; i < 6; i++)
       wa[i].draw();
-    drawCoordinate();
-
+    //    drawCoordinate();
+    draw_ground();
     glfwSwapBuffers(window);
     glfwPollEvents();
   }
@@ -134,4 +135,15 @@ void mouse_move_callback(GLFWwindow* window, double xpos, double ypos) {
   lastX = xpos;
   lastY = ypos;
   cam.rotate(yoffset/100.0, xoffset/100.0);
+}
+void draw_ground() {
+  glBegin(GL_QUADS);
+  
+  glColor3f(0.8, 0.8, 0.8);
+  glVertex3f(4, 0, 4);
+  glVertex3f(4, 0, -4);
+  glVertex3f(-4, 0, -4);
+  glVertex3f(-4, 0, 4);
+  glEnd();
+  glFlush();
 }

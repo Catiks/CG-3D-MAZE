@@ -54,12 +54,9 @@ Camera::Camera(GLfloat posx, GLfloat posy, GLfloat posz,
   if (targetx < posx)
     _yaw = -_yaw;
 
-  std::cout << _yaw << std::endl;
-
   if (d != 0)
     _pitch = atan((targety - posy)/d)*180/PI;
   this->update();
-  std::cout << _pitch << std::endl;
 }
   /*initialize camera--including the key and mouse move */
 
